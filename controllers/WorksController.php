@@ -58,15 +58,17 @@ class WorksController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id = null)
     {
         $model = new Works();
+        //var_dump($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id_works]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'id'=>$id,
             ]);
         }
     }

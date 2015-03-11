@@ -12,7 +12,7 @@ use Yii;
  * @property string $inv
  * @property string $serial
  * @property integer $year
- * @property integer $id_spec
+ * @property integer $id_specs
  */
 class Printers extends \yii\db\ActiveRecord
 {
@@ -32,16 +32,17 @@ class Printers extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['name', 'inv', 'serial'], 'string'],
-            [['year', 'id_spec'], 'integer']
+            [['year', 'id_specs'], 'integer'],
+            [['specs'],'safe']
         ];
     }
 
-    public function getSpec()
+    public function getSpecs()
     {
-        return $this->hasOne('app\models\Specs',["id_specs" => "id_specs"]);
+        return $this->hasOne(Specs::className(),['id_specs' => 'id_specs']);
     }
 
-    public function getWork()
+    public function getWorks()
     {
         return $this->hasMany('app\models\Works',["id_printers" => "id_printers"]);
     }
@@ -57,7 +58,9 @@ class Printers extends \yii\db\ActiveRecord
             'inv' => 'Інвентарний номер',
             'serial' => 'Серійний номер',
             'year' => 'Рік випуску',
-            'id_spec' => 'Відповідальний',
+            'id_specs' => 'Відповідальний',
+            'specs' => 'Відповідальний',
+            'works' => 'Роботи',
         ];
     }
 }

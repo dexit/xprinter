@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Specs';
+$this->title = 'Відповідальні';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="specs-index">
@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id_specs',
+            //'id_specs',
             'fio:ntext',
 
             ['class' => 'yii\grid\ActionColumn'],

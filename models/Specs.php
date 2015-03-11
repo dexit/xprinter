@@ -20,6 +20,11 @@ class Specs extends \yii\db\ActiveRecord
         return 'specs';
     }
 
+    public function getPrinters()
+    {
+        return $this->hasMany(Printers::className(),['id_specs'=>'id_specs']);
+    }
+
     /**
      * @inheritdoc
      */

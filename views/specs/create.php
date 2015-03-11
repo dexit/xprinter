@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Specs */
 
-$this->title = 'Create Specs';
+$this->title = 'Додати відповідального';
 $this->params['breadcrumbs'][] = ['label' => 'Specs', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Printers */
 
-$this->title = 'Update Printers: ' . ' ' . $model->name;
+$this->title = 'Оновити дані принтера: ' . ' ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Printers', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id_printers]];
 $this->params['breadcrumbs'][] = 'Update';

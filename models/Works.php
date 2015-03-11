@@ -32,11 +32,12 @@ class Works extends \yii\db\ActiveRecord
             [['id_printers', 'date'], 'required'],
             [['id_printers'], 'integer'],
             [['date', 'description'], 'string'],
-            [['summ'], 'number']
+            [['summ'], 'number'],
+            [['printers'], 'safe'],
         ];
     }
 
-    public function getPrinter()
+    public function getPrinters()
     {
         return $this->hasOne('app\models\Printers',["id_printers" => "id_printers"]);
     }
@@ -52,6 +53,7 @@ class Works extends \yii\db\ActiveRecord
             'date' => 'Дата',
             'summ' => 'Сума (грн.)',
             'description' => 'Виконані роботи',
+            'printers' => 'Принтер',
         ];
     }
 }

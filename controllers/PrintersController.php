@@ -4,7 +4,9 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Printers;
+use app\models\Works;
 use yii\data\ActiveDataProvider;
+use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -48,8 +50,14 @@ class PrintersController extends Controller
      */
     public function actionView($id)
     {
+        $works = Works::findAll(['id_printers'=> $id]);
+        $worksProvider = new ArrayDataProvider([
+            'allModels'=>$works,
+        ]);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'works' => $worksProvider,
         ]);
     }
 
