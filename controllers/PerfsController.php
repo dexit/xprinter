@@ -3,18 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Printers;
-use app\models\Works;
+use app\models\Perfs;
 use yii\data\ActiveDataProvider;
-use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PrintersController implements the CRUD actions for Printers model.
+ * PerfsController implements the CRUD actions for Perfs model.
  */
-class PrintersController extends Controller
+class PerfsController extends Controller
 {
     public function behaviors()
     {
@@ -29,16 +27,13 @@ class PrintersController extends Controller
     }
 
     /**
-     * Lists all Printers models.
+     * Lists all Perfs models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Printers::find(),
-            'pagination' => [
-                'pageSize' => 1000,
-            ],
+            'query' => Perfs::find(),
         ]);
 
         return $this->render('index', [
@@ -47,34 +42,28 @@ class PrintersController extends Controller
     }
 
     /**
-     * Displays a single Printers model.
+     * Displays a single Perfs model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
-        $works = Works::findAll(['id_printers'=> $id]);
-        $worksProvider = new ArrayDataProvider([
-            'allModels'=>$works,
-        ]);
-
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'works' => $worksProvider,
         ]);
     }
 
     /**
-     * Creates a new Printers model.
+     * Creates a new Perfs model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Printers();
+        $model = new Perfs();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_printers]);
+            return $this->redirect(['view', 'id' => $model->id_perfs]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -83,7 +72,7 @@ class PrintersController extends Controller
     }
 
     /**
-     * Updates an existing Printers model.
+     * Updates an existing Perfs model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -93,7 +82,7 @@ class PrintersController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_printers]);
+            return $this->redirect(['view', 'id' => $model->id_perfs]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -102,7 +91,7 @@ class PrintersController extends Controller
     }
 
     /**
-     * Deletes an existing Printers model.
+     * Deletes an existing Perfs model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -115,15 +104,15 @@ class PrintersController extends Controller
     }
 
     /**
-     * Finds the Printers model based on its primary key value.
+     * Finds the Perfs model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Printers the loaded model
+     * @return Perfs the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Printers::findOne($id)) !== null) {
+        if (($model = Perfs::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

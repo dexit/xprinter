@@ -43,8 +43,8 @@ $config = [
             'showScriptName' => false,
         ],
         'db' => require(__DIR__ . '/db.php'),
-        //'language' => 'UK',
     ],
+    'language' => 'uk',
     'params' => $params,
     'modules' => [
         'gii' => [

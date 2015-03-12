@@ -38,8 +38,9 @@ AppAsset::register($this);
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
                     ['label' => 'Принтери', 'url' => [\yii\helpers\Url::home()]],
-                    ['label' => 'Відповідальні', 'url' => [\yii\helpers\Url::to('specs/index')]],
                     ['label' => 'Роботи', 'url' => [\yii\helpers\Url::to('works/index')]],
+                    ['label' => 'Виконавці', 'url' => [\yii\helpers\Url::to('perfs/index')]],
+                    ['label' => 'Відповідальні', 'url' => [\yii\helpers\Url::to('specs/index')]],
                     ['label' => 'Довідка', 'url' => ['/site/about']],
                     Yii::$app->user->isGuest ?
                         ['label' => 'Вхід', 'url' => ['/site/login']] :
@@ -52,9 +53,9 @@ AppAsset::register($this);
         ?>
 
         <div class="container">
-            <?php //Breadcrumbs::widget([
-                //'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            //]) ?>
+            <?php /*Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]) */?>
             <?= $content ?>
 
         </div>

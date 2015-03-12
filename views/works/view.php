@@ -34,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'date:ntext',
             'summ',
             'description:ntext',
+            'perfs.name',
         ],
     ]) ?>
 
