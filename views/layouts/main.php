@@ -41,12 +41,12 @@ AppAsset::register($this);
                     ['label' => 'Роботи', 'url' => [\yii\helpers\Url::to('works/index')]],
                     ['label' => 'Виконавці', 'url' => [\yii\helpers\Url::to('perfs/index')]],
                     ['label' => 'Відповідальні', 'url' => [\yii\helpers\Url::to('specs/index')]],
-                    ['label' => 'Довідка', 'url' => ['/site/about']],
+                    /*['label' => 'Довідка', 'url' => ['/site/about']],
                     Yii::$app->user->isGuest ?
                         ['label' => 'Вхід', 'url' => ['/site/login']] :
                         ['label' => 'Вихід (' . Yii::$app->user->identity->username . ')',
                             'url' => ['/site/logout'],
-                            'linkOptions' => ['data-method' => 'post']],
+                            'linkOptions' => ['data-method' => 'post']],*/
                 ],
             ]);
             NavBar::end();

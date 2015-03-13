@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="printers-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
+    <hr />
     <p>
         <?= Html::a('Оновити', ['update', 'id' => $model->id_printers], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Видалити', ['delete', 'id' => $model->id_printers], [
@@ -39,13 +39,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'specs.fio',
         ],
     ]) ?>
-
+    <hr />
+    <h4><?= Html::encode("Виконані роботи") ?></h4>
     <?= GridView::widget([
        'dataProvider'=>$works,
        'columns'=>[
            'date:ntext',
            'summ:ntext',
            'description:ntext',
+           'perfs.name'
         ],
     ]) ?>
 
