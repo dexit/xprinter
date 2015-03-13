@@ -10,14 +10,6 @@ $this->title = 'Роботи';
 $this->params['breadcrumbs'][] = $this->title;
 $dataProvider->setSort(['defaultOrder'=>['date'=>SORT_DESC],]);
 
-//var_dump(time());
-//$date_to_unixtime = strtotime('25th October 2009 11:12:34 PM (UTC)');
-//var_dump($date_to_unixtime);
-//$unix_to_date = timetostr($date_to_unixtime);
-//var_dump($unix_to_date);
-//$unixtime_to_date = date('d/m/Y', time());
-//var_dump($unixtime_to_date);
-
 ?>
 <div class="works-index">
 
@@ -38,7 +30,6 @@ $dataProvider->setSort(['defaultOrder'=>['date'=>SORT_DESC],]);
             'summ',
             'description:ntext',
             ['attribute'=>'perfs','value'=>'perfs.name'],
-
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

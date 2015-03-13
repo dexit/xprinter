@@ -14,8 +14,15 @@ use yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?php if (!$model->isNewRecord){?>
     <?= $form->field($model, 'id_printers')->dropDownList(
-            arrayHelper::map(\app\models\Printers::find()->all(),'id_printers','name'),[$model->id_printers=>['selected'=>'selected']]) ?>
+            arrayHelper::map(\app\models\Printers::findAll(['id_printers'=>$model->id_printers]),'id_printers','name')) ?>
+    <?php } else { ?>
+    <?= $form->field($model, 'id_printers')->dropDownList(
+            arrayHelper::map(\app\models\Printers::find()->all(),'id_printers','name'))
+
+    ?>
+    <?php }?>
 
     <?= $form->field($model, 'date')->widget(\yii\widgets\MaskedInput::classname(),
                 ['name' => 'date',
@@ -33,9 +40,15 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'id_perfs')->dropDownList(
-            arrayHelper::map(\app\models\Perfs::find()->all(),'id_perfs','name'),[$model->id_perfs=>['selected'=>'selected']])
-    ?>
+    <?php if ($model->isNewRecord){ ?>
+        <?= $form->field($model, 'id_perfs')->dropDownList(
+            arrayHelper::map(\app\models\Perfs::find()->all(),'id_perfs','name')
+        ) ?>
+    <?php } else { ?>
+        <?= $form->field($model, 'id_perfs')->dropDownList(
+            arrayHelper::map(\app\models\Perfs::find()->all(),'id_perfs','name'),[$model->id_perfs=>['selected'=>'selected']]
+        ) ?>
+    <?php } ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Додати' : 'Оновити', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

@@ -47,7 +47,15 @@ $this->params['breadcrumbs'][] = $this->title;
            'date:ntext',
            'summ:ntext',
            'description:ntext',
-           'perfs.name'
+           'perfs.name',
+
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'urlCreator' => function($action, $model, $key, $index) {
+                    return "?r=works/$action&id=$model->id_works";
+                },
+                'template'=>'{view}{update}{delete}',
+            ],
         ],
     ]) ?>
 

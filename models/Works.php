@@ -6,6 +6,7 @@ use Yii;
 use \yii\behaviors\TimeStampBehavior;
 use \yii\db\ActiveRecord;
 use \DateTime;
+use \DateTimeZone;
 
 /**
  * This is the model class for table "works".
@@ -85,17 +86,13 @@ class Works extends \yii\db\ActiveRecord
                     ActiveRecord::EVENT_BEFORE_UPDATE => 'date',
                 ],
                 'value' => function() {
-                    //$date = DateTime::createFromFormat("j F Y", "2013-10-10");
-                    $date_obj = new DateTime($this->date);
+                    $d = explode("/", $this->date);
+                    $date_obj = new DateTime;
+                    $date_obj->setDate($d[2],$d[1],$d[0]);
                     $date = $date_obj->format("j F Y");
-                    //$date = $date_obj->createFromFormat("j F Y",)
                     $c_date = strtotime($date);
-                    //var_dump($c_date);
-                    //var_dump($this);
-                    //var_dump($this->date = $c_date);
-                    //$this->date = (string)$c_date;
+
                     return $this->date = (string)$c_date;
-                    //var_dump($this);
                 },
             ],
         ];
