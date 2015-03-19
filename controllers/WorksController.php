@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+//use yii\
 
 /**
  * WorksController implements the CRUD actions for Works model.
@@ -61,13 +62,15 @@ class WorksController extends Controller
     public function actionCreate()
     {
         $model = new Works();
+        $id = Yii::$app->getRequest()->getQueryParam('id');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_works]);
+            //return $this->redirect(['view', 'id' => $model->id_works]);
+            return $this->redirect(['printers/view', 'id' => $model->id_printers]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-
+                'id' => $id,
             ]);
         }
     }
@@ -83,7 +86,8 @@ class WorksController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_works]);
+            //return $this->redirect(['view', 'id' => $model->id_works]);
+            return $this->redirect(['printers/view', 'id' => $model->id_printers]);
         } else {
             return $this->render('update', [
                 'model' => $model,

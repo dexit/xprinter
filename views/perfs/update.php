@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Perfs */
 
-$this->title = 'Update Perfs: ' . ' ' . $model->name;
+$this->title = 'Редагувати дані виконавця ' . ' ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Perfs', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id_perfs]];
 $this->params['breadcrumbs'][] = 'Update';

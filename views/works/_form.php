@@ -8,14 +8,22 @@ use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 /* @var $model app\models\Works */
 /* @var $form yii\widgets\ActiveForm */
+//var_dump($id);
 ?>
 
 <div class="works-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?php if (!empty($id)){ ?>
     <?= $form->field($model, 'id_printers')->dropDownList(
-            arrayHelper::map(\app\models\Printers::find()->all(),'id_printers','name'),[$model->id_printers=>['selected'=>'selected']]) ?>
+        arrayHelper::map(\app\models\Printers::find()->where(['id_printers'=>$id])->all(),'id_printers','name')
+    ); ?>
+    <?php } else { ?>
+    <?= $form->field($model, 'id_printers')->dropDownList(
+        arrayHelper::map(\app\models\Printers::find()->all(),'id_printers','name'),['prompt'=>'--Оберіть принтер--']
+    ); ?>
+    <?php } ?>
 
     <?= $form->field($model, 'date')->widget(\yii\widgets\MaskedInput::classname(),
                 ['name' => 'date',
@@ -38,7 +46,7 @@ use yii\helpers\ArrayHelper;
     ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Додати' : 'Оновити', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Зберегти' : 'Зберегти', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

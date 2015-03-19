@@ -17,11 +17,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <hr />
     <p>
-        <?= Html::a('Оновити', ['update', 'id' => $model->id_printers], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Редагувати', ['update', 'id' => $model->id_printers], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Видалити', ['delete', 'id' => $model->id_printers], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Ви впевнені, що бажаєте видалити даний принтер?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -39,8 +39,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'specs.fio',
         ],
     ]) ?>
+    <?php if (!empty($works->allModels)) { ?>
     <hr />
     <h4><?= Html::encode("Виконані роботи") ?></h4>
+
+
     <?= GridView::widget([
        'dataProvider'=>$works,
        'columns'=>[
@@ -58,6 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]) ?>
+    <?php } ?>
 
     <?= Html::a('Додати роботи', ['works/create', 'id' => $model->id_printers], ['class' => 'btn btn-primary']) ?>
 </div>

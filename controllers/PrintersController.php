@@ -10,6 +10,7 @@ use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\Sort;
 
 /**
  * PrintersController implements the CRUD actions for Printers model.
@@ -56,7 +57,20 @@ class PrintersController extends Controller
         $works = Works::findAll(['id_printers'=> $id]);
         $worksProvider = new ArrayDataProvider([
             'allModels'=>$works,
+            'id'=>'date',
+            'sort'=>[
+                 'attributes'=>[
+                     'date'=>[
+                            'asc'=>['sort_date'=>SORT_ASC],
+                            //'desc'=>['sort_date'=>SORT_DESC],
+                            'default'=>SORT_ASC,
+                        ],
+                     'summ'
+                 ],
+                //'default'=>'date ASC',
+             ]
         ]);
+        //$worksProvider->sort->defaultOrder = "date ASC";
 
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -74,7 +88,8 @@ class PrintersController extends Controller
         $model = new Printers();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_printers]);
+            //return $this->redirect(['view', 'id' => $model->id_printers]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,

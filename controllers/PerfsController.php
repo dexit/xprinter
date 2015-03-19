@@ -63,7 +63,8 @@ class PerfsController extends Controller
         $model = new Perfs();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_perfs]);
+            //return $this->redirect(['view', 'id' => $model->id_perfs]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -82,7 +83,8 @@ class PerfsController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_perfs]);
+            //return $this->redirect(['view', 'id' => $model->id_perfs]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
