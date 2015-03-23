@@ -66,6 +66,7 @@ class Works extends \yii\db\ActiveRecord
             'description' => 'Виконані роботи',
             'printers' => 'Принтер',
             'perfs' => 'Виконавець',
+            'fio'=>'ПІБ',
         ];
     }
 

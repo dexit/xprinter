@@ -27,6 +27,7 @@ $dataProvider->setSort(['defaultOrder'=>['date'=>SORT_DESC],]);
             //'id_works',
             //'id_printers',
             ['attribute'=>'printers','value'=>'printers.name'],
+            ['attribute'=>'fio','value'=>'printers.specs.fio'],
             'summ',
             'description:ntext',
             ['attribute'=>'perfs','value'=>'perfs.name'],

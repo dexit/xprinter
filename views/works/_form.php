@@ -8,7 +8,12 @@ use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 /* @var $model app\models\Works */
 /* @var $form yii\widgets\ActiveForm */
-//var_dump($id);
+
+$printers_obj = \app\models\Printers::find()->all();
+$printers_arr = arrayHelper::map($printers_obj,'id_printers', 'name');
+foreach ($printers_arr as $k=>$v) {
+    $printers_arr[$k]=$v.' - '.arrayHelper::getValue($printers_obj[$k-1],'specs.fio');
+}
 ?>
 
 <div class="works-form">
@@ -21,7 +26,7 @@ use yii\helpers\ArrayHelper;
     ); ?>
     <?php } else { ?>
     <?= $form->field($model, 'id_printers')->dropDownList(
-        arrayHelper::map(\app\models\Printers::find()->all(),'id_printers','name'),['prompt'=>'--Оберіть принтер--']
+        $printers_arr,['prompt'=>'--Оберіть принтер--']
     ); ?>
     <?php } ?>
 
