@@ -37,7 +37,7 @@ AppAsset::register($this);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => 'Принтери', 'url' => [\yii\helpers\Url::home()]],
+                    ['label' => 'Принтери', 'url' => ['/']],
                     ['label' => 'Роботи', 'url' => [\yii\helpers\Url::to('works/index')]],
                     ['label' => 'Виконавці', 'url' => [\yii\helpers\Url::to('perfs/index')]],
                     ['label' => 'Відповідальні', 'url' => [\yii\helpers\Url::to('specs/index')]],

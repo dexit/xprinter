@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-use \yii\behaviors\TimeStampBehavior;
+use \yii\behaviors\TimestampBehavior;
 use \yii\db\ActiveRecord;
 use \DateTime;
 use \DateTimeZone;
