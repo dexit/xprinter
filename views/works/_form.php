@@ -12,8 +12,9 @@ use yii\helpers\ArrayHelper;
 $printers_obj = \app\models\Printers::find()->all();
 $printers_arr = arrayHelper::map($printers_obj,'id_printers', 'name');
 $printers_spec = arrayHelper::map($printers_obj,'id_printers', 'specs.fio');
+$printers_inv = arrayHelper::map($printers_obj,'id_printers', 'inv');
 foreach ($printers_arr as $k=>$v) {
-    $printers_arr[$k]=$v.' - '.$printers_spec[$k];
+    $printers_arr[$k]=$v.' ('.$printers_inv[$k].') - '.$printers_spec[$k];
 }
 ?>
 

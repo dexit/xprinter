@@ -47,6 +47,11 @@ class Printers extends \yii\db\ActiveRecord
         return $this->hasMany('app\models\Works',["id_printers" => "id_printers"]);
     }
 
+    public function getCountWorks()
+    {
+        return \app\models\Works::find()->where(['id_printers'=>$this->id_printers])->count();
+    }
+
     /**
      * @inheritdoc
      */
@@ -61,6 +66,7 @@ class Printers extends \yii\db\ActiveRecord
             'id_specs' => 'Відповідальний',
             'specs' => 'Відповідальний',
             'works' => 'Роботи',
+            'CountWorks' => 'Кількість робіт',
         ];
     }
 }

@@ -11,6 +11,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\Sort;
+use app\models\PrinterSearch;
 
 /**
  * PrintersController implements the CRUD actions for Printers model.
@@ -38,11 +39,15 @@ class PrintersController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => Printers::find(),
             'pagination' => [
-                'pageSize' => 1000,
+                'pageSize' => 50,
             ],
         ]);
 
+        $searchModel = new PrinterSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -70,7 +75,7 @@ class PrintersController extends Controller
                 //'default'=>'date ASC',
              ]
         ]);
-        //$worksProvider->sort->defaultOrder = "date ASC";
+        $worksProvider->sort->defaultOrder = "date ASC";
 
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -88,7 +93,6 @@ class PrintersController extends Controller
         $model = new Printers();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            //return $this->redirect(['view', 'id' => $model->id_printers]);
             return $this->redirect(['index']);
         } else {
             return $this->render('create', [

@@ -37,10 +37,30 @@ AppAsset::register($this);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => 'Принтери', 'url' => ['/']],
-                    ['label' => 'Роботи', 'url' => [\yii\helpers\Url::to('works/index')]],
-                    ['label' => 'Виконавці', 'url' => [\yii\helpers\Url::to('perfs/index')]],
-                    ['label' => 'Відповідальні', 'url' => [\yii\helpers\Url::to('specs/index')]],
+                    ['label' => 'Принтери', 'url' => ['/'],
+                        'items'=>[
+                            ['label'=>'Перелік', 'url'=>[\yii\helpers\Url::to('printers/index')]],
+                            ['label'=>'Додати', 'url'=>[\yii\helpers\Url::to('printers/create')]]
+                        ]
+                    ],
+                    ['label' => 'Роботи', 'url' => [\yii\helpers\Url::to('works/index')],
+                        'items'=>[
+                            ['label'=>'Перелік', 'url'=>[\yii\helpers\Url::to('works/index')]],
+                            ['label'=>'Додати', 'url'=>[\yii\helpers\Url::to('works/create')]]
+                        ]
+                    ],
+                    ['label' => 'Виконавці', 'url' => [\yii\helpers\Url::to('perfs/index')],
+                        'items'=>[
+                            ['label'=>'Перелік', 'url'=>[\yii\helpers\Url::to('perfs/index')]],
+                            ['label'=>'Додати', 'url'=>[\yii\helpers\Url::to('perfs/create')]]
+                        ]
+                    ],
+                    ['label' => 'Відповідальні', 'url' => [\yii\helpers\Url::to('specs/index')],
+                        'items'=>[
+                            ['label'=>'Перелік', 'url'=>[\yii\helpers\Url::to('specs/index')]],
+                            ['label'=>'Додати', 'url'=>[\yii\helpers\Url::to('printers/create')]]
+                        ]
+                    ],
                     /*['label' => 'Довідка', 'url' => ['/site/about']],
                     Yii::$app->user->isGuest ?
                         ['label' => 'Вхід', 'url' => ['/site/login']] :
