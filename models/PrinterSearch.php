@@ -13,6 +13,8 @@ use app\models\Printers;
 class PrinterSearch extends Printers
 {
     public $countWorks;
+    public $specs;
+
     /**
      * @inheritdoc
      */
@@ -20,7 +22,7 @@ class PrinterSearch extends Printers
     {
         return [
             [['id_printers', 'year', 'id_specs'], 'integer'],
-            [['name', 'inv', 'serial', 'countWorks'], 'safe'],
+            [['name', 'inv', 'serial', 'countWorks', 'specs'], 'safe'],
         ];
     }
 
@@ -44,34 +46,23 @@ class PrinterSearch extends Printers
     {
         $query = Printers::find();
 
-        //$query->joinWith(['specs']);
+        $query->joinWith(['specs']);
+        $query->joinWith(['works']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
-        $dataProvider->setSort([
-            'attributes' => [
-                //'id',
-                /*'countWorks' => [
-                    //'asc' => ['countWorks' => SORT_ASC],
-                    'asc' => ['countWorks' => SORT_ASC],
-                    'desc' => ['countWorks' => SORT_DESC],
-                    'label' => 'cccc',
-                    'default' => SORT_ASC
-                ],
-                'id_printers'*/
-                'name',
-                'inv',
-                'serial',
-                'year',
-                'specs'=>[
-                    /*'ask'=>['specs.fio'=>SORT_ASC],
-                    'desk'=>['specs.fio'=>SORT_DESC],
-                    'default'=>SORT_ASC,*/
-                ],
-            ]
-        ]);
+        $dataProvider->sort->attributes['specs'] = [
+            'asc' => ['specs.fio'=>SORT_ASC],
+            'desc' => ['specs.fio'=>SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['countWorks'] = [
+            'asc' => ['works.c'=>SORT_ASC],
+            'desc' => ['works.c'=>SORT_DESC],
+        ];
+        //var_dump($dataProvider->sort->attributes);
 
         $this->load($params);
 
@@ -84,13 +75,13 @@ class PrinterSearch extends Printers
         $query->andFilterWhere([
             'id_printers' => $this->id_printers,
             'year' => $this->year,
-            'id_specs' => $this->id_specs,
-            //'specs.fio' => $this->id_specs,
+            //'countWorks' => $this->countWorks,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'inv', $this->inv])
-            ->andFilterWhere(['like', 'serial', $this->serial]);
+            ->andFilterWhere(['like', 'serial', $this->serial])
+            ->andFilterWhere(['like', 'specs.fio', $this->specs]);
 
         return $dataProvider;
     }

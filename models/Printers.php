@@ -16,6 +16,7 @@ use Yii;
  */
 class Printers extends \yii\db\ActiveRecord
 {
+    //public $countWorks;
     /**
      * @inheritdoc
      */
@@ -33,7 +34,7 @@ class Printers extends \yii\db\ActiveRecord
             [['name'], 'required'],
             [['name', 'inv', 'serial'], 'string'],
             [['year', 'id_specs'], 'integer'],
-            [['specs'],'safe']
+            [['specs','countWorks'],'safe']
         ];
     }
 
@@ -66,7 +67,7 @@ class Printers extends \yii\db\ActiveRecord
             'id_specs' => 'Відповідальний',
             'specs' => 'Відповідальний',
             'works' => 'Роботи',
-            'CountWorks' => 'Кількість робіт',
+            'countWorks' => 'Кількість робіт',
         ];
     }
 }
