@@ -47,7 +47,8 @@ class PrinterSearch extends Printers
         $query = Printers::find();
 
         $query->joinWith(['specs']);
-        $query->joinWith(['works']);
+        //$query->leftJoin(['works'])->andWhere('id_printers=1')->count()->groupBy('printers.id_printers');
+
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -59,10 +60,9 @@ class PrinterSearch extends Printers
         ];
 
         $dataProvider->sort->attributes['countWorks'] = [
-            'asc' => ['works.c'=>SORT_ASC],
-            'desc' => ['works.c'=>SORT_DESC],
+            'asc' => ['countWorks'=>SORT_ASC],
+            'desc' => ['countWorks'=>SORT_DESC],
         ];
-        //var_dump($dataProvider->sort->attributes);
 
         $this->load($params);
 
@@ -82,6 +82,7 @@ class PrinterSearch extends Printers
             ->andFilterWhere(['like', 'inv', $this->inv])
             ->andFilterWhere(['like', 'serial', $this->serial])
             ->andFilterWhere(['like', 'specs.fio', $this->specs]);
+            //->andFilterWhere(['like', 'countWorks', $this->countWorks]);
 
         return $dataProvider;
     }

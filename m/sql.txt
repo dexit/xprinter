@@ -1,0 +1,8 @@
+select count(*) as c from works group by works.id_printers order by c desc
+
+
+select printers.*, count(works.id_works), specs.fio
+from printers
+left outer join works on printers.id_printers=works.id_printers
+left join specs on printers.id_specs=specs.id_specs
+group by printers.id_printers
