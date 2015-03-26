@@ -39,8 +39,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['attribute'=>'count',
                 'label'=>'Кількість робіт',
                 'value'=>function ($data){
-                    return $count = \app\models\Works::find()->where(['id_printers'=>$data->id_printers])->count();
-                    //return $data->countWorks;
+                    //return $count = \app\models\Works::find()->where(['id_printers'=>$data->id_printers])->count();
+                    return $data->countWorks;
                 }
             ],
             'year',

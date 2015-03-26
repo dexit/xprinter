@@ -11,6 +11,8 @@ $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Printers', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
+//$works->setSort(['defaultOrder'=>['date'=>SORT_DESC],]);
+//var_dump($works);
 ?>
 <div class="printers-view">
 
@@ -39,10 +41,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'specs.fio',
         ],
     ]) ?>
-    <?php if (!empty($works->allModels)) { ?>
+    <?php //if (!empty($works->query)) { ?>
     <hr />
     <h4><?= Html::encode("Виконані роботи") ?></h4>
-
 
     <?= GridView::widget([
        'dataProvider'=>$works,
@@ -61,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]) ?>
-    <?php } ?>
+    <?php //} ?>
 
     <?= Html::a('Додати роботи', ['works/create', 'id' => $model->id_printers], ['class' => 'btn btn-primary']) ?>
 </div>

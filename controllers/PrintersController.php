@@ -59,8 +59,26 @@ class PrintersController extends Controller
      */
     public function actionView($id)
     {
-        $works = Works::findAll(['id_printers'=> $id]);
-        $worksProvider = new ArrayDataProvider([
+        //$works = Works::findAll(['id_printers'=> $id]);
+        $worksProvider = new ActiveDataProvider([
+            //'query'=>Works::findAll(['id_printers'=> $id]),
+            'query'=>Works::find()->where(['id_printers'=> $id]),
+            'pagination' => [
+                'pageSize' => 40,
+            ],
+            'sort'=>[
+                'attributes'=>[
+                    'date'=>[
+                        'asc'=>['date'=>SORT_ASC],
+                        'desc'=>['date'=>SORT_DESC],
+                        //'default'=>'date SORT_DESC',
+                    ],
+                    'summ',
+                ]
+            ]
+        ]);
+        $worksProvider->setSort(['defaultOrder'=>['date'=>SORT_DESC],]);
+        /*$worksProvider = new ArrayDataProvider([
             'allModels'=>$works,
             'id'=>'date',
             'sort'=>[
@@ -75,8 +93,8 @@ class PrintersController extends Controller
                 //'default'=>'date ASC',
              ]
         ]);
-        $worksProvider->sort->defaultOrder = "date ASC";
-
+        $worksProvider->sort->defaultOrder = "date ASC";*/
+   //var_dump($worksProvider);
         return $this->render('view', [
             'model' => $this->findModel($id),
             'works' => $worksProvider,
