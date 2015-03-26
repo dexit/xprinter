@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\WorksSearch;
 //use yii\
 
 /**
@@ -37,8 +38,12 @@ class WorksController extends Controller
             'query' => Works::find(),
         ]);
 
+        $searchModel = new WorksSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 

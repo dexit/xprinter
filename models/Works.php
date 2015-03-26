@@ -52,6 +52,12 @@ class Works extends \yii\db\ActiveRecord
         return $this->hasOne('app\models\Perfs',['id_perfs' => 'id_perfs']);
     }
 
+    public function getSpecs()
+    {
+        return $this->hasOne(Specs::className(),['id_specs' => 'id_specs'])->via('printers');
+        //return 0;
+    }
+
     /**
      * @inheritdoc
      */
