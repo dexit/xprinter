@@ -15,6 +15,9 @@ class WorksSearch extends Works
     public $printers;
     public $specs;
     public $perfs;
+    public $inv;
+
+    public $printername;
 
     /**
      * @inheritdoc
@@ -24,7 +27,7 @@ class WorksSearch extends Works
         return [
             [['id_works', 'id_printers', 'date', 'id_perfs'], 'integer'],
             [['summ'], 'number'],
-            [['description','printers','perfs','specs'], 'safe'],
+            [['description','printers','perfs','specs','inv','printername',], 'safe'],
         ];
     }
 
@@ -61,6 +64,11 @@ class WorksSearch extends Works
             'desc' => ['printers.name'=>SORT_DESC],
         ];
 
+        $dataProvider->sort->attributes['printername'] = [
+            'asc' => ['printername'=>SORT_ASC],
+            'desc' => ['printername'=>SORT_DESC],
+        ];
+
         $dataProvider->sort->attributes['specs'] = [
             'asc' => ['printers.specs.fio'=>SORT_ASC],
             'desc' => ['printers.specs.fio'=>SORT_DESC],
@@ -85,12 +93,15 @@ class WorksSearch extends Works
             'date' => $this->date,
             'summ' => $this->summ,
             'id_perfs' => $this->id_perfs,
+            'printername' => $this->printername,
         ]);
 
         $query->andFilterWhere(['like', 'description', $this->description])
-              ->andFilterWhere(['like', 'printers.name', $this->printers])
+              //->andFilterWhere(['like', 'printers.name', $this->printers])
               ->andFilterWhere(['like', 'printers.specs.fio', $this->specs])
-              ->andFilterWhere(['like', 'perfs.name', $this->perfs]);
+              ->andFilterWhere(['like', 'printername', $this->printername])
+              ->andFilterWhere(['like', 'perfs.name', $this->perfs])
+              ->andFilterWhere(['like', 'printers.inv', $this->inv]);
 
         return $dataProvider;
     }

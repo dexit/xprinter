@@ -38,7 +38,7 @@ class Works extends \yii\db\ActiveRecord
             [['id_printers'], 'integer'],
             [['description','date'], 'string'],
             [['summ','id_perfs'], 'number'],
-            [['printers','perfs'], 'safe'],
+            [['printers','perfs','printername'], 'safe'],
         ];
     }
 
@@ -47,12 +47,25 @@ class Works extends \yii\db\ActiveRecord
         return $this->hasOne('app\models\Printers',["id_printers" => "id_printers"]);
     }
 
+    public function getPrintername()
+    {
+        //var_dump(Printers::find()->where('id_printers='.$this->id_printers)->all()[0]['name']);
+        //break;
+        return Printers::find()->where('id_printers='.$this->id_printers)->all()[0]['name'];
+    }
+
     public function getPerfs()
     {
         return $this->hasOne('app\models\Perfs',['id_perfs' => 'id_perfs']);
     }
 
     public function getSpecs()
+    {
+        return $this->hasOne(Specs::className(),['id_specs' => 'id_specs'])->via('printers');
+        //return 0;
+    }
+
+    public function getInv()
     {
         return $this->hasOne(Specs::className(),['id_specs' => 'id_specs'])->via('printers');
         //return 0;
@@ -72,7 +85,9 @@ class Works extends \yii\db\ActiveRecord
             'description' => 'Виконані роботи',
             'printers' => 'Принтер',
             'perfs' => 'Виконавець',
-            'fio'=>'ПІБ',
+            'specs'=>'Відоповідальний',
+            'inv'=>'Інвентарний номер',
+            'printername'=>'Принтер',
         ];
     }
 

@@ -36,12 +36,12 @@ class PrintersController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
+        /*$dataProvider = new ActiveDataProvider([
             'query' => Printers::find(),
             'pagination' => [
                 'pageSize' => 50,
             ],
-        ]);
+        ]);*/
 
         $searchModel = new PrinterSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);

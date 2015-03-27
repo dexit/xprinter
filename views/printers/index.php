@@ -36,11 +36,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'inv:ntext',
             'serial:ntext',
-            ['attribute'=>'count',
+            ['attribute'=>'countworks',
                 'label'=>'Кількість робіт',
                 'value'=>function ($data){
                     //return $count = \app\models\Works::find()->where(['id_printers'=>$data->id_printers])->count();
-                    return $data->countWorks;
+                    //var_dump($data);
+                    return $data->countworks;
                 }
             ],
             'year',
