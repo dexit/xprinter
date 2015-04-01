@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Works;
+use \DateTime;
 
 /**
  * WorksSearch represents the model behind the search form about `app\models\Works`.
@@ -48,7 +49,6 @@ class WorksSearch extends Works
      */
     public function search($params)
     {
-        //var_dump($params);
         $query = Works::find();
 
         $query->joinWith(['specs']);
@@ -89,6 +89,14 @@ class WorksSearch extends Works
             // uncomment the following line if you do not want to any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
+        }
+
+        if ($this->date) {
+            $d = explode("/", $this->date);
+            $date_obj = new DateTime();
+            $date_obj->setDate($d[2],$d[1],$d[0]);
+            $date_m = $date_obj->format("j F Y");
+            $this->date = strtotime($date_m);
         }
 
         $query->andFilterWhere([

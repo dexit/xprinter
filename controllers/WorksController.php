@@ -9,7 +9,6 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\WorksSearch;
-use \DateTime;
 
 /**
  * WorksController implements the CRUD actions for Works model.
@@ -35,20 +34,7 @@ class WorksController extends Controller
     public function actionIndex()
     {
         $searchModel = new WorksSearch();
-
-        /*$queryParams = Yii::$app->request->queryParams;
-
-        if (isset($queryParams['WorksSearch']['date'])) {
-            $date = $queryParams['WorksSearch']['date'];
-            $d = explode("/", $date);
-            $date_obj = new DateTime();
-            $date_obj->setDate(explode("/", $date)[2],explode("/", $date)[1],explode("/", $date)[0]);
-            $date_m = $date_obj->format("j F Y");
-            $queryParams['WorksSearch']['date'] = strtotime($date_m);
-        }*/
-
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        //$dataProvider = $searchModel->search($queryParams);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,

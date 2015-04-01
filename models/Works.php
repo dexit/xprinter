@@ -6,7 +6,6 @@ use Yii;
 use \yii\behaviors\TimestampBehavior;
 use \yii\db\ActiveRecord;
 use \DateTime;
-#use \DateTimeZone;
 
 /**
  * This is the model class for table "works".
@@ -20,11 +19,6 @@ use \DateTime;
  */
 class Works extends \yii\db\ActiveRecord
 {
-    public function init()
-    {
-        //var_dump($this);
-
-    }
     /**
      * @inheritdoc
      */
@@ -60,13 +54,11 @@ class Works extends \yii\db\ActiveRecord
     public function getSpecs()
     {
         return $this->hasOne(Specs::className(),['id_specs' => 'id_specs'])->via('printers');
-        //return 0;
     }
 
     public function getInv()
     {
         return $this->hasOne(Specs::className(),['id_specs' => 'id_specs'])->via('printers');
-        //return 0;
     }
 
     /**
