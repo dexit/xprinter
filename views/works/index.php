@@ -8,7 +8,7 @@ use yii\grid\GridView;
 
 $this->title = 'Роботи';
 $this->params['breadcrumbs'][] = $this->title;
-$dataProvider->setSort(['defaultOrder'=>['date'=>SORT_DESC],]);
+//$dataProvider->setSort(['defaultOrder'=>['date'=>SORT_DESC],]);
 
 ?>
 <div class="works-index">
@@ -28,10 +28,11 @@ $dataProvider->setSort(['defaultOrder'=>['date'=>SORT_DESC],]);
             'date:ntext',
             //'id_works',
             //'id_printers',
-            ['attribute'=>'printers','value'=>'printers.name'],
-            ['attribute'=>'printername','value'=>function($data){return $data->printername;}],
+            ['attribute'=>'printersname','value'=>'printers.name'],
+           // ['attribute'=>'printername','value'=>function($data){return $data->printername;}],
             ['attribute'=>'inv','value'=>'printers.inv'],
-            ['attribute'=>'specs','value'=>'printers.specs.fio'],
+            ['attribute'=>'specs','value'=>'specs.fio'],
+            //['attribute'=>'specs','value'=>'printers.id_specs'],
             //['attribute'=>'fio','value'=>'printers.specs.fio'],
             'summ',
             'description:ntext',

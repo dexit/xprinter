@@ -50,7 +50,6 @@ class Printers extends \yii\db\ActiveRecord
 
     public function getCountworks()
     {
-       // return \app\models\Works::find()->where(['id_printers'=>$this->id_printers])->count();
         return $this->hasMany('app\models\Works',['id_printers'=>"id_printers"])->count();
     }
 

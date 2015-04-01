@@ -9,7 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\WorksSearch;
-//use yii\
+use \DateTime;
 
 /**
  * WorksController implements the CRUD actions for Works model.
@@ -34,12 +34,21 @@ class WorksController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Works::find(),
-        ]);
-
         $searchModel = new WorksSearch();
+
+        /*$queryParams = Yii::$app->request->queryParams;
+
+        if (isset($queryParams['WorksSearch']['date'])) {
+            $date = $queryParams['WorksSearch']['date'];
+            $d = explode("/", $date);
+            $date_obj = new DateTime();
+            $date_obj->setDate(explode("/", $date)[2],explode("/", $date)[1],explode("/", $date)[0]);
+            $date_m = $date_obj->format("j F Y");
+            $queryParams['WorksSearch']['date'] = strtotime($date_m);
+        }*/
+
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        //$dataProvider = $searchModel->search($queryParams);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
@@ -70,7 +79,6 @@ class WorksController extends Controller
         $id = Yii::$app->getRequest()->getQueryParam('id');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            //return $this->redirect(['view', 'id' => $model->id_works]);
             return $this->redirect(['printers/view', 'id' => $model->id_printers]);
         } else {
             return $this->render('create', [
@@ -91,7 +99,6 @@ class WorksController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            //return $this->redirect(['view', 'id' => $model->id_works]);
             return $this->redirect(['printers/view', 'id' => $model->id_printers]);
         } else {
             return $this->render('update', [

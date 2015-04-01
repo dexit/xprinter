@@ -6,7 +6,7 @@ use Yii;
 use \yii\behaviors\TimestampBehavior;
 use \yii\db\ActiveRecord;
 use \DateTime;
-use \DateTimeZone;
+#use \DateTimeZone;
 
 /**
  * This is the model class for table "works".
@@ -20,6 +20,11 @@ use \DateTimeZone;
  */
 class Works extends \yii\db\ActiveRecord
 {
+    public function init()
+    {
+        //var_dump($this);
+
+    }
     /**
      * @inheritdoc
      */
@@ -45,13 +50,6 @@ class Works extends \yii\db\ActiveRecord
     public function getPrinters()
     {
         return $this->hasOne('app\models\Printers',["id_printers" => "id_printers"]);
-    }
-
-    public function getPrintername()
-    {
-        //var_dump(Printers::find()->where('id_printers='.$this->id_printers)->all()[0]['name']);
-        //break;
-        return Printers::find()->where('id_printers='.$this->id_printers)->all()[0]['name'];
     }
 
     public function getPerfs()
@@ -87,7 +85,7 @@ class Works extends \yii\db\ActiveRecord
             'perfs' => 'Виконавець',
             'specs'=>'Відоповідальний',
             'inv'=>'Інвентарний номер',
-            'printername'=>'Принтер',
+            'printersname'=>'Принтер',
         ];
     }
 

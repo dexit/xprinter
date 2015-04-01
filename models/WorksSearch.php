@@ -16,8 +16,7 @@ class WorksSearch extends Works
     public $specs;
     public $perfs;
     public $inv;
-
-    public $printername;
+    public $printersname;
 
     /**
      * @inheritdoc
@@ -25,9 +24,9 @@ class WorksSearch extends Works
     public function rules()
     {
         return [
-            [['id_works', 'id_printers', 'date', 'id_perfs'], 'integer'],
+            [['id_works', 'id_printers', 'id_perfs'], 'integer'],
             [['summ'], 'number'],
-            [['description','printers','perfs','specs','inv','printername',], 'safe'],
+            [['description','printers','perfs','specs','inv','printersname', 'date'], 'safe'],
         ];
     }
 
@@ -49,29 +48,34 @@ class WorksSearch extends Works
      */
     public function search($params)
     {
+        //var_dump($params);
         $query = Works::find();
 
         $query->joinWith(['specs']);
-        $query->joinWith(['printers']);
         $query->joinWith(['perfs']);
+
+        $subQueryPrinters = Printers::find()->select('id_printers, name, inv')->groupBy('id_printers');
+        $query->leftJoin(['printersname'=>$subQueryPrinters],'printersname.id_printers=works.id_printers');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
-        $dataProvider->sort->attributes['printers'] = [
+        $dataProvider->setSort(['defaultOrder'=>['date'=>SORT_DESC],]);
+
+        $dataProvider->sort->attributes['printersname'] = [
             'asc' => ['printers.name'=>SORT_ASC],
             'desc' => ['printers.name'=>SORT_DESC],
         ];
 
-        $dataProvider->sort->attributes['printername'] = [
-            'asc' => ['printername'=>SORT_ASC],
-            'desc' => ['printername'=>SORT_DESC],
+        $dataProvider->sort->attributes['inv'] = [
+            'asc' => ['printers.inv'=>SORT_ASC],
+            'desc' => ['printers.inv'=>SORT_DESC],
         ];
 
         $dataProvider->sort->attributes['specs'] = [
-            'asc' => ['printers.specs.fio'=>SORT_ASC],
-            'desc' => ['printers.specs.fio'=>SORT_DESC],
+            'asc' => ['specs.fio'=>SORT_ASC],
+            'desc' => ['specs.fio'=>SORT_DESC],
         ];
 
         $dataProvider->sort->attributes['perfs'] = [
@@ -93,13 +97,11 @@ class WorksSearch extends Works
             'date' => $this->date,
             'summ' => $this->summ,
             'id_perfs' => $this->id_perfs,
-            'printername' => $this->printername,
         ]);
 
         $query->andFilterWhere(['like', 'description', $this->description])
-              //->andFilterWhere(['like', 'printers.name', $this->printers])
-              ->andFilterWhere(['like', 'printers.specs.fio', $this->specs])
-              ->andFilterWhere(['like', 'printername', $this->printername])
+              ->andFilterWhere(['like', 'printersname.name', $this->printersname])
+              ->andFilterWhere(['like', 'specs.fio', $this->specs])
               ->andFilterWhere(['like', 'perfs.name', $this->perfs])
               ->andFilterWhere(['like', 'printers.inv', $this->inv]);
 
