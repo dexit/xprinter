@@ -37,7 +37,7 @@ class Works extends \yii\db\ActiveRecord
             [['id_printers'], 'integer'],
             [['description','date'], 'string'],
             [['summ','id_perfs'], 'number'],
-            [['printers','perfs','printername'], 'safe'],
+            [['printers','perfs'], 'safe'],
         ];
     }
 
