@@ -6,3 +6,16 @@ from printers
 left outer join works on printers.id_printers=works.id_printers
 left join specs on printers.id_specs=specs.id_specs
 group by printers.id_printers
+
+=============================
+
+select id_printers, count(id_works) as countworks from works group by id_printers
+
+=============================
+
+SELECT * FROM printers
+LEFT JOIN specs ON printers.id_specs = specs.id_specs
+LEFT JOIN
+    (SELECT works.id_printers, count(id_works) as countworks
+        FROM works
+        GROUP BY id_printers) count_works ON count_works.id_printers = printers.id_printers

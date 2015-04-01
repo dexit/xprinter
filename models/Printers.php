@@ -16,7 +16,7 @@ use Yii;
  */
 class Printers extends \yii\db\ActiveRecord
 {
-    //public $countWorks;
+    //public $countworks;
     /**
      * @inheritdoc
      */
@@ -50,7 +50,8 @@ class Printers extends \yii\db\ActiveRecord
 
     public function getCountworks()
     {
-        return \app\models\Works::find()->where(['id_printers'=>$this->id_printers])->count();
+       // return \app\models\Works::find()->where(['id_printers'=>$this->id_printers])->count();
+        return $this->hasMany('app\models\Works',['id_printers'=>"id_printers"])->count();
     }
 
     /**
@@ -70,9 +71,4 @@ class Printers extends \yii\db\ActiveRecord
             'countworks' => 'Кількість робіт',
         ];
     }
-
-    /*public function afterFind()
-    {
-        return $this->countWorks = $this->getCountWorks();
-    }*/
 }

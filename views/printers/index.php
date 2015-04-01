@@ -36,6 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'inv:ntext',
             'serial:ntext',
+            //'countworks',
             ['attribute'=>'countworks',
                 'label'=>'Кількість робіт',
                 'value'=>function ($data){
