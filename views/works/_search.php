@@ -6,6 +6,22 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\WorksSearch */
 /* @var $form yii\widgets\ActiveForm */
+
+$datepickerOptions = [
+    'language' => 'UK',
+    'dateFormat'=>'dd/MM/yyyy',
+    'clientOptions' => [
+        'showAnim' => 'slideDown',
+        'autoSize'=>true,
+        'regional'=>'',
+        'showOn'=>'button',
+        'buttonImage'=> 'images/calendar.png',
+	    'buttonImageOnly'=> true,
+        'dayNamesMin'=> [ "Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Нд" ],
+        'monthNames'=> [ "Січень", "Лютий", "Березень", "Квітень", "Травень",
+                         "Червень", "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень" ],
+    ]
+];
 ?>
 
 <div class="works-search">
@@ -15,21 +31,21 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id_works') ?>
 
-    <?= $form->field($model, 'id_printers') ?>
+    <?= $form->field($model, 'date_from')->widget(\yii\jui\DatePicker::className(),$datepickerOptions) ?>
 
-    <?= $form->field($model, 'date') ?>
-
-    <?= $form->field($model, 'summ') ?>
-
-    <?= $form->field($model, 'description') ?>
+    <?= $form->field($model, 'date_to')->widget(\yii\jui\DatePicker::className(),$datepickerOptions) ?>
 
     <?php // echo $form->field($model, 'id_perfs') ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton('Пошук', ['class' => 'btn btn-primary']) ?>
+        <?= Html::button('Відмінити', ['class' => 'btn btn-default',
+                                        'onclick'=>'(function ($event)
+                                            {
+                                                document.getElementById("workssearch-date_from").value = "";
+                                                document.getElementById("workssearch-date_to").value = "";
+                                            })();']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

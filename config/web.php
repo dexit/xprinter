@@ -53,6 +53,9 @@ $config = [
                 '127.0.0.1',
             ],
         ],
+        'gridview' =>  [
+            'class' => '\kartik\grid\Module'
+        ]
     ],
 ];
 

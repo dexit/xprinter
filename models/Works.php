@@ -78,6 +78,8 @@ class Works extends \yii\db\ActiveRecord
             'specs'=>'Відоповідальний',
             'inv'=>'Інвентарний номер',
             'printersname'=>'Принтер',
+            'date_from'=>'Дата з',
+            'date_to'=>'по',
         ];
     }
 

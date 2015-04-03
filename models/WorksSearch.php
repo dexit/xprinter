@@ -19,6 +19,9 @@ class WorksSearch extends Works
     public $inv;
     public $printersname;
 
+    public $date_from;
+    public $date_to;
+
     /**
      * @inheritdoc
      */
@@ -57,6 +60,35 @@ class WorksSearch extends Works
         $subQueryPrinters = Printers::find()->select('id_printers, name, inv')->groupBy('id_printers');
         $query->leftJoin(['printersname'=>$subQueryPrinters],'printersname.id_printers=works.id_printers');
 
+        if (isset(Yii::$app->request->queryParams['WorksSearch']['date_from']) ||
+            isset(Yii::$app->request->queryParams['WorksSearch']['date_to']))
+        {
+            if (!empty(Yii::$app->request->queryParams['WorksSearch']['date_from'])) {
+                 $d = explode("/", Yii::$app->request->queryParams['WorksSearch']['date_from']);
+                 $date_obj = new DateTime();
+                 $date_obj->setDate($d[2],$d[1],$d[0]);
+                 $date_m = $date_obj->format("j F Y");
+                 $this->date_from = strtotime($date_m);
+            }
+
+            if (!empty(Yii::$app->request->queryParams['WorksSearch']['date_to'])) {
+                 $d = explode("/", Yii::$app->request->queryParams['WorksSearch']['date_to']);
+                 $date_obj = new DateTime();
+                 $date_obj->setDate($d[2],$d[1],$d[0]);
+                 $date_m = $date_obj->format("j F Y");
+                 $this->date_to = strtotime($date_m);
+            }
+
+            if ($this->date_from && empty($this->date_to)) {
+                $query->where('date between '.$this->date_from.' and 999999999');
+            } elseif (empty($this->date_from) && $this->date_to) {
+                $query->where('date between 000000000 and '.$this->date_to);
+            } elseif ($this->date_from && $this->date_to) {
+                $query->where('date between '.$this->date_from.' and '.$this->date_to);
+            }
+
+        }
+        
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
