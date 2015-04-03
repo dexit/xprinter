@@ -1,10 +1,10 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+//use yii\grid\GridView;
 
 use kartik\export\ExportMenu;
-//use kartik\grid\GridView;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -17,18 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
-    <?=
-        \yii\bootstrap\Collapse::widget([
-            'items' => [
-                [
-                    'label' => 'Пошук за період',
-                    'content' => $this->render('_search', ['model' => $searchModel]),
-                    'contentOptions' => [ ],
-                    'options' => [ ]
-                ],
-            ]
-        ]);
-    ?>
+
 
     <p>
         <?= Html::a('Додати роботу', ['create'], ['class' => 'btn btn-success']) ?>
@@ -54,14 +43,33 @@ $this->params['breadcrumbs'][] = $this->title;
         ['class' => 'yii\grid\ActionColumn'],
     ];
 
+    $pageSummary = "wdd";
+
         echo ExportMenu::widget([
         'dataProvider' => $dataProvider,
         'columns' => $gridColumns,
         'fontAwesome' => true,
+        'dropdownOptions' => [
+            'label' => 'Export All',
+            'class' => 'btn btn-default'
+        ]
     ]);
     ?>
-
-    <?= GridView::widget([
+    <hr />
+    <?=
+    \yii\bootstrap\Collapse::widget([
+        'items' => [
+            [
+                'label' => 'Пошук за період',
+                'content' => $this->render('_search', ['model' => $searchModel]),
+                'contentOptions' => [ ],
+                'options' => [ ]
+            ],
+        ]
+    ]);
+    ?>
+    <hr />
+    <?= kartik\grid\GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => $gridColumns,

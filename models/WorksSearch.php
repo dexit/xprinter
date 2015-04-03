@@ -88,7 +88,7 @@ class WorksSearch extends Works
             }
 
         }
-        
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
